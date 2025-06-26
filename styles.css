@@ -1,0 +1,762 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    backdrop-filter: brightness(0.7);
+    font-family: 'Segoe UI', sans-serif;
+    color: #fff;
+}
+
+/* 页面容器样式 */
+.pages {
+    min-height: 100vh;
+    padding-top: 0;
+}
+
+/* 页面基础样式 */
+.page {
+    display: none;
+    padding: 2rem;
+    backdrop-filter: brightness(0.95);
+    min-height: 100vh; /* 添加最小高度适配屏幕 */
+    background-size: cover; /* 统一背景图片尺寸 */
+}
+
+/* 修改main容器样式以适配背景 */
+main {
+    padding-top: 80px;
+    backdrop-filter: brightness(0.95);
+    min-height: calc(100vh - 80px); /* 移除底部padding计算 */
+    overflow: hidden;
+}
+
+/* 不同页面背景设置 */
+.page1 {
+    background: url('images/home-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.page2 {
+    background: url('images/toolbox-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.page3 {
+    background: url('images/bsod-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.page4 {
+    background: url('images/yzpe-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.page.active {
+    display: block;
+}
+
+/* 修改导航栏基础样式 */
+.glass-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(15px) brightness(1.1);
+    -webkit-backdrop-filter: blur(15px);
+    background: rgba(0, 0, 0, 0.3); /* 改为淡黑色背景 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.glass-navbar:hover {
+    background: rgba(0, 0, 0, 0.4); /* 悬停时加深淡黑色 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+/* 调整导航项间距和高度 */
+.nav-links li a {
+    text-decoration: none;
+    color: #ffffffcc;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 0; /* 将垂直内边距从0.75rem减少到0.5rem */
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+}
+
+/* 新增导航图标样式 */
+.nav-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+}
+
+/* 添加hover时的图标动画效果 */
+.nav-links li a:hover .nav-icon {
+    transform: scale(1.1) translateX(-2px);
+}
+
+/* 添加导航项选中状态样式 */
+.nav-links li a.active,
+.nav-links li a:target {
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255,255,255,0.5);
+    transform: scale(1.05) translateY(-2px);
+}
+
+/* 修正active状态的层级关系 */
+.nav-links li a.active::after,
+.nav-links li a:target::after {
+    width: 100%;
+}
+
+/* 修改hover动画防止与active冲突 */
+.nav-links li a:hover:not(.active) {
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+/* 修改品牌LOGO样式以支持图标布局 */
+.logo {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    gap: 0.8rem; /* 控制图标与文字间距 */
+}
+
+/* 新增品牌图标样式 */
+.logo-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+
+/* 新增：复用玻璃导航栏样式 */
+.footer {
+    @extend .glass-navbar; /* 继承导航栏基础样式 */
+    position: static; /* 取消固定定位 */
+    padding: 2rem 2rem 4rem; /* 调整内边距适配内容 */
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* 与导航栏保持一致 */
+    box-shadow: none; /* 移除阴影避免重复 */
+    backdrop-filter: blur(15px) brightness(1.1); /* 与导航栏保持一致 */
+    background: transparent; /* 新增：使页脚背景透明 */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.footer-section {
+    padding: 1rem;
+}
+
+.footer-section h3 {
+    color: #ffffffcc;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #38bdf8);
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section li {
+    margin: 0.6rem 0;
+}
+
+.footer-section a {
+    color: #ffffffaa;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+/* 修改页脚悬停效果 */
+.footer-section a:hover {
+    color: #38bdf8;
+    transform: translateX(5px);
+}
+
+.about p {
+    color: #ffffffaa;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+    transform: scale(1.2) rotate(10deg);
+}
+
+.copyright {
+    margin-top: 1.5rem;
+    color: #ffffff88;
+    font-size: 0.9rem;
+    white-space: nowrap; /* 新增：强制保持单行显示 */
+}
+
+/* 响应式优化调整 */
+@media (max-width: 768px) {
+    .copyright {
+        margin-top: 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .social-icons {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-section {
+        padding: 0.5rem;
+    }
+    
+    .social-icons {
+        margin-top: 1rem;
+    }
+}
+
+/* 修改页脚宽度控制方式 */
+
+.toolbox-container {
+    display: flex;
+    flex-direction: row; /* 修改为水平排列 */
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 2rem 0;
+    margin-top: 2rem;
+}
+
+.download-section {
+    width: 45%; /* 保持原有宽度 */
+    padding-right: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* 添加高度适配 */
+}
+
+.software-preview {
+    width: 55%; /* 保持原有宽度 */
+    height: auto; /* 修改为自适应高度 */
+    min-height: 300px; /* 添加最小高度 */
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* 修改图片适配方式 */
+.software-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 改为cover模式填满容器 */
+    border-radius: 12px; /* 增加圆角保持视觉统一 */
+}
+
+.software-info {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+/* 修改软件信息文字颜色 */
+.software-info h3 {
+    font-size: 1.8rem;
+    color: #fff; // 改为白色
+    margin-bottom: 1rem;
+}
+
+.software-info p {
+    font-size: 1.1rem;
+    color: #e2e8f0; // 浅灰色替代原深灰
+    line-height: 1.6;
+}
+
+/* 修改下载按钮样式，添加深红色渐变 */
+.download-btn {
+    /* 移除可能导致宽度自适应的属性 */
+    white-space: nowrap; /* 禁止文字换行 */
+    display: inline-block; /* 改用固定宽度显示 */
+    width: auto; /* 明确宽度由内容决定 */
+    padding: 1.4rem 1.2rem; /* 保持原有内边距 */
+    background: linear-gradient(145deg, #e11d48, #b91c1c); /* 改为深红色渐变 */
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 700;
+    border-radius: 12px;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 
+        0 4px 15px rgba(225,29,72,0.3), /* 调整阴影颜色 */
+        inset 0 -2px 0 rgba(255,255,255,0.2);
+    transition: all 0.3s ease-in-out;
+    animation: gradientMove 4s ease-in-out infinite;
+    background-size: 200% 200%;
+    display: inline-flex; /* 支持图标布局 */
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem; /* 图标与文字间距 */
+}
+
+/* 增强悬停效果 */
+.download-btn:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 
+        0 8px 20px rgba(225,29,72,0.4), /* 调整悬停阴影颜色 */
+        inset 0 -2px 0 rgba(255,255,255,0.3);
+    animation-play-state: paused;
+}
+
+/* 按下效果 */
+.download-btn:active {
+    transform: translateY(-1px) scale(0.99);
+    box-shadow: 
+        0 4px 12px rgba(225,29,72,0.3), /* 调整按下阴影颜色 */
+        inset 0 -2px 0 rgba(255,255,255,0.2);
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+    .download-btn {
+        font-size: 1.1rem;
+        padding: 1.2rem 1rem;
+    }
+}
+
+/* 新增功能卡片样式 */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem; /* 增加间距 */
+    margin-top: 4rem;
+    padding: 0 2rem;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px; /* 增加圆角 */
+    padding: 2rem 1.5rem; /* 调整内边距 */
+    border: 2px solid transparent;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    transition: all 0.4s ease;
+    transform: translateY(0);
+    animation: float 6s ease-in-out infinite;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255,255,255,0.2);
+    box-shadow: 
+        0 12px 24px rgba(0, 0, 0, 0.2),
+        inset 0 0 0 1px rgba(255,255,255,0.1);
+    animation-play-state: paused;
+}
+
+/* 新增浮动动画 */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+/* 增强功能卡片图标效果 */
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1.2rem;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: rotate(15deg) scale(1.1);
+}
+
+/* 优化下载卡片样式 */
+.download-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.2rem 1.2rem;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    transition: all 0.5s ease;
+    border: 2px solid transparent;
+    box-shadow: 
+        0 8px 20px rgba(0,0,0,0.15),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+.download-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255,255,255,0.25);
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 
+        0 15px 30px rgba(0,0,0,0.25),
+        inset 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+/* 新增模态框阴影主题 */
+.modal-container {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* 改为顶部对齐 */
+    perspective: 1000px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-container.active {
+    top: 0;
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.8) 100%);
+    backdrop-filter: blur(10px);
+}
+
+.modal-content {
+    position: relative;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 3rem;
+    width: 90%;
+    max-width: 700px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-container.active .modal-content {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+}
+
+
+
+.modal-content:hover {
+    animation: pulse 2s infinite;
+}
+
+/* 改进关闭按钮样式 */
+.modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 2.2rem;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: rgba(255,255,255,0.2);
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* 优化下载卡片样式 */
+.download-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.download-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.8rem 1rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.08);
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+}
+
+.download-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255,255,255,0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.download-card img {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 1rem;
+    transition: transform 0.4s ease;
+}
+
+.download-card:hover img {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.download-card span {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.download-card:hover span {
+    color: #4ade80;
+}
+
+/* 新增响应式优化 */
+@media (max-width: 640px) {
+    .modal-content {
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+    }
+    
+    .download-card span {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    .features-grid {
+        padding: 0 1rem;
+    }
+}
+
+/* 新增工作室介绍样式 */
+.studio-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4rem;
+    padding: 3rem 0;
+}
+
+.intro-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.features-list {
+    list-style: none;
+    padding-left: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+.features-list li {
+    margin-bottom: 0.8rem;
+    color: #e2e8f0;
+    font-size: 1.1rem;
+    position: relative;
+}
+
+.features-list li::before {
+    content: '✨';
+    position: absolute;
+    left: -1.2rem;
+    top: -0.2rem;
+    font-size: 1.2rem;
+}
+
+.studio-logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-image {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    border-radius: 20%;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    transition: transform 0.6s ease-in-out;
+}
+
+.logo-image:hover {
+    transform: rotate(360deg) scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .studio-intro {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .studio-logo {
+        order: -1;
+    }
+}
+
+/* 新增禁止滚动样式 */
+html.no-scroll, body.no-scroll {
+    overflow: hidden !important;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+/* 新增全局背景覆盖样式 */
+html, body {
+    background: url('images/home-bg.jpg') no-repeat center center fixed; /* 统一背景图片 */
+    background-size: cover;
+}
+
+@media (max-width: 768px) {
+    .glass-navbar {
+        padding: 0.8rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .logo {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .logo-icon {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .nav-links {
+        flex-direction: column;
+        gap: 0.8rem;
+        width: 100%;
+    }
+    
+    .nav-links li a {
+        padding: 0.4rem 0;
+        font-size: 1rem;
+    }
+    
+    .nav-icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .glass-navbar {
+        padding: 0.6rem 1rem;
+    }
+    
+    .logo {
+        gap: 0.5rem;
+    }
+    
+    .nav-links li a {
+        font-size: 0.9rem;
+    }
+}
