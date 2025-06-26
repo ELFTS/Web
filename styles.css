@@ -30,22 +30,22 @@ main {
 }
 
 /* 不同页面背景设置 */
-.page1 {
+.home {
     background: url('images/home-bg.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
-.page2 {
+.toolbox {
     background: url('images/toolbox-bg.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
-.page3 {
+.bsod {
     background: url('images/bsod-bg.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
-.page4 {
+.yzpe {
     background: url('images/yzpe-bg.jpg') no-repeat center center fixed;
     background-size: cover;
 }

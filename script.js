@@ -16,7 +16,7 @@ function showPage(pageClass) {
 
 // 新增页面加载时根据hash恢复状态
 document.addEventListener('DOMContentLoaded', () => {
-    const hash = window.location.hash.substring(1) || 'page1';
+    const hash = window.location.hash.substring(1) || 'home';
     showPage(hash);
     
     // 为所有导航链接添加点击事件处理
