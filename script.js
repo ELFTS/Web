@@ -57,3 +57,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// 在文件底部添加显示模态框的逻辑
+document.getElementById('downloadTrigger').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('downloadModal').classList.add('active');
+});
+
+// 添加点击遮罩层关闭功能
+document.querySelector('.modal-overlay').addEventListener('click', function() {
+    document.getElementById('downloadModal').classList.remove('active');
+});
+
+// 添加关闭按钮事件
+document.getElementById('modalClose').addEventListener('click', function() {
+    document.getElementById('downloadModal').classList.remove('active');
+});
