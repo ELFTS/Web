@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadTrigger.addEventListener('click', (e) => {
             e.preventDefault();
             downloadModal.classList.add('active');
-            document.body.classList.add('no-scroll');  // 添加禁止滚动
         });
     }
 
@@ -45,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalClose && downloadModal) {
         modalClose.addEventListener('click', () => {
             downloadModal.classList.remove('active');
-            document.body.classList.remove('no-scroll');  // 移除禁止滚动
         });
     }
 
@@ -53,23 +51,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (modalOverlay && downloadModal) {
         modalOverlay.addEventListener('click', () => {
             downloadModal.classList.remove('active');
-            document.body.classList.remove('no-scroll');  // 移除禁止滚动
         });
     }
-});
 
-// 在文件底部添加显示模态框的逻辑
-document.getElementById('downloadTrigger').addEventListener('click', function(e) {
-    e.preventDefault();
-    document.getElementById('downloadModal').classList.add('active');
-});
+    // 在文件底部添加显示模态框的逻辑
+    document.getElementById('downloadTrigger').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('downloadModal').classList.add('active');
+    });
 
-// 添加点击遮罩层关闭功能
-document.querySelector('.modal-overlay').addEventListener('click', function() {
-    document.getElementById('downloadModal').classList.remove('active');
-});
+    // 添加点击遮罩层关闭功能
+    document.querySelector('.modal-overlay').addEventListener('click', function() {
+        document.getElementById('downloadModal').classList.remove('active');
+    });
 
-// 添加关闭按钮事件
-document.getElementById('modalClose').addEventListener('click', function() {
-    document.getElementById('downloadModal').classList.remove('active');
+    // 添加关闭按钮事件
+    document.getElementById('modalClose').addEventListener('click', function() {
+        document.getElementById('downloadModal').classList.remove('active');
+    });
 });
