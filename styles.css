@@ -97,20 +97,37 @@ main {
     font-weight: 500;
     transition: all 0.3s ease;
     position: relative;
-    padding: 0.5rem 0; /* 将垂直内边距从0.75rem减少到0.5rem */
+    padding: 0.5rem 0;
     display: flex;
     align-items: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 新增基础文字阴影 */
 }
 
-.nav-links li a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #ffffff;
+/* 增强导航链接悬停阴影效果 */
+.nav-links li a:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* 悬停时加深阴影 */
+}
+
+/* 修改导航链接文字阴影 */
+.nav-links li a {
+    text-decoration: none;
+    color: #ffffffcc;
+    font-weight: 500;
     transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 新增基础文字阴影 */
+}
+
+/* 增强导航链接悬停阴影效果 */
+.nav-links li a:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* 悬停时加深阴影 */
 }
 
 /* 新增导航图标样式 */
@@ -159,6 +176,7 @@ main {
     font-weight: bold;
     letter-spacing: 1px;
     gap: 0.8rem; /* 控制图标与文字间距 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* 增强LOGO阴影效果 */
 }
 
 /* 新增品牌图标样式 */
@@ -194,21 +212,17 @@ main {
 }
 
 .footer-section h3 {
-    color: #ffffffcc;
+    color: #fff; /* 修改为纯白色 */
     font-size: 1.2rem;
     margin-bottom: 1.5rem;
     position: relative;
     padding-bottom: 0.5rem;
 }
 
-.footer-section h3::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 40px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #38bdf8);
+.footer-section p {
+    color: #fff; /* 修改为纯白色 */
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
 }
 
 .footer-section ul {
@@ -222,7 +236,7 @@ main {
 }
 
 .footer-section a {
-    color: #ffffffaa;
+    color: #fff; /* 修改为纯白色 */
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -257,9 +271,9 @@ main {
 
 .copyright {
     margin-top: 1.5rem;
-    color: #ffffff88;
+    color: #fff; /* 修改为纯白色 */
     font-size: 0.9rem;
-    white-space: nowrap; /* 新增：强制保持单行显示 */
+    white-space: nowrap;
 }
 
 /* 响应式优化调整 */
@@ -365,12 +379,14 @@ main {
     font-size: 1.8rem;
     color: #fff; // 改为白色
     margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* 加强标题阴影 */
 }
 
 .software-info p {
     font-size: 1.1rem;
     color: #e2e8f0; // 浅灰色替代原深灰
     line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 常规段落阴影 */
 }
 
 /* 修改软件大小提示文字颜色为白色 */
@@ -381,6 +397,7 @@ main {
     margin-top: 0.5rem; /* 从0.8rem微调 */
     opacity: 0.8;
     animation: fadeIn 1s ease-in-out;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 添加文字阴影 */
 }
 
 /* 修改下载按钮样式，增加宽度 */
@@ -846,4 +863,36 @@ html, body {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(5px); }
     to { opacity: 0.8; transform: translateY(0); }
+}
+
+/* 添加工作室介绍文字阴影 */
+.studio-intro h1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* 增强标题阴影 */
+}
+
+.studio-intro p {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 常规段落阴影 */
+}
+
+/* 添加功能卡片文字阴影 */
+.feature-card h4,
+.feature-card p {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 功能卡片文字阴影 */
+}
+
+/* 添加下载卡片文字阴影 */
+.download-card span {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 下载卡片文字阴影 */
+}
+
+/* 添加页脚文字阴影 */
+.footer-section h3,
+.footer-section p,
+.footer-section a {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* 页脚文字阴影 */
+}
+
+/* 添加版权信息阴影 */
+.copyright p {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); /* 较淡的版权阴影 */
 }
