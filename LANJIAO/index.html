@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LANJIAO 鸟峰创可贴 | 暗黑官方站</title>
+    <style>
+        /* ========== 全局样式（恐怖暗黑版） ========== */
+        :root {
+            --primary: #8b0000;
+            --primary-dark: #4a0000;
+            --primary-light: #1e0a0a;
+            --accent: #7cfc00;
+            --text: #d4c5c5;
+            --text-light: #8a7a7a;
+            --bg: #0d0d0d;
+            --bg-gray: #1a1a1a;
+            --shadow: 0 10px 30px rgba(139, 0, 0, 0.4);
+            --radius: 16px;
+            --transition: all 0.3s ease;
+            --blood: #8b0000;
+            --ghost-white: #f0e6e6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, 'Microsoft YaHei', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230d0d0d"/><path d="M20 20 L30 20 L25 30 Z" fill="%231a1a1a"/><circle cx="60" cy="50" r="2" fill="%231a1a1a"/><circle cx="80" cy="20" r="1.5" fill="%231a1a1a"/></svg>');
+            background-size: 100px 100px;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 恐怖装饰：蜘蛛网 */
+        .spiderweb {
+            position: fixed;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 9999;
+            background: radial-gradient(circle at 20% 20%, transparent 20%, rgba(200,200,200,0.2) 21%, transparent 22%, transparent 35%, rgba(200,200,200,0.2) 36%, transparent 37%, transparent 50%, rgba(200,200,200,0.2) 51%, transparent 52%, transparent 65%, rgba(200,200,200,0.2) 66%, transparent 67%);
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+        .spiderweb-left {
+            top: auto;
+            bottom: -80px;
+            left: -80px;
+            right: auto;
+            transform: rotate(-45deg);
+        }
+
+        /* 导航栏 */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 5, 5, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(139, 0, 0, 0.3);
+            border-bottom: 1px solid #3a0000;
+            transition: var(--transition);
+        }
+        header.scrolled {
+            box-shadow: 0 5px 30px rgba(139, 0, 0, 0.6);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--blood);
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(139,0,0,0.7);
+            font-family: 'Impact', 'Courier New', sans-serif;
+        }
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px rgba(139,0,0,0.8);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(139,0,0,0.8); }
+            50% { box-shadow: 0 0 30px rgba(139,0,0,1); }
+        }
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        .nav-menu li a {
+            font-weight: 500;
+            color: var(--text);
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+            text-shadow: 0 0 5px rgba(0,0,0,0.5);
+        }
+        .nav-menu li a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--blood);
+            transition: var(--transition);
+            box-shadow: 0 0 10px var(--blood);
+        }
+        .nav-menu li a:hover {
+            color: var(--ghost-white);
+            text-shadow: 0 0 15px var(--blood);
+        }
+        .nav-menu li a:hover::after { width: 100%; }
+        .nav-cta {
+            background: var(--primary);
+            color: white !important;
+            padding: 10px 20px !important;
+            border-radius: 30px;
+            transition: var(--transition);
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.6);
+            text-shadow: 0 0 5px black;
+        }
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(139, 0, 0, 0.9);
+        }
+        .nav-cta::after { display: none !important; }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--blood);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        /* 英雄区域 */
+        .hero {
+            padding: 140px 0 100px;
+            background: radial-gradient(ellipse at center, #1a0a0a 0%, #0d0d0d 70%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(139,0,0,0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: fog 8s infinite alternate;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -100px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(124,252,0,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: fog 12s infinite alternate-reverse;
+        }
+        @keyframes fog {
+            0% { transform: translate(0,0) scale(1); opacity: 0.4; }
+            100% { transform: translate(30px, 20px) scale(1.2); opacity: 0.8; }
+        }
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-text { flex: 1; }
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--ghost-white);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(139,0,0,0.7), 0 0 40px rgba(139,0,0,0.4);
+            font-family: 'Impact', 'Courier New', sans-serif;
+            letter-spacing: 2px;
+        }
+        .hero-text h1 span {
+            color: var(--blood);
+            position: relative;
+            animation: flicker 3s infinite;
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            3% { opacity: 0.7; }
+            6% { opacity: 1; }
+            7% { opacity: 0.4; }
+            8% { opacity: 1; }
+            50% { opacity: 1; }
+            52% { opacity: 0.8; }
+            53% { opacity: 1; }
+        }
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            text-shadow: 0 0 5px black;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            letter-spacing: 1px;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 0 25px rgba(139, 0, 0, 0.6);
+            text-shadow: 0 0 5px black;
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(139, 0, 0, 0.9);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--blood);
+            border: 2px solid var(--blood);
+            box-shadow: 0 0 15px rgba(139,0,0,0.3);
+        }
+        .btn-outline:hover {
+            background: var(--blood);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(139,0,0,0.7);
+        }
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-product-card {
+            background: #1a0a0a;
+            border: 1px solid #3a0000;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(139,0,0,0.3), inset 0 0 20px rgba(139,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            animation: float 4s ease-in-out infinite;
+            overflow: hidden;
+        }
+        .hero-product-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(139,0,0,0.1) 0%, transparent 60%);
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        .hero-product-card .product-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 15px rgba(139,0,0,0.6));
+        }
+        .hero-product-card h3 {
+            font-size: 1.5rem;
+            color: var(--blood);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            font-family: 'Impact', 'Courier New', sans-serif;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(139,0,0,0.8);
+        }
+        .hero-product-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 通用标题 */
+        .section { padding: 80px 0; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--ghost-white);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 15px rgba(139,0,0,0.6);
+            font-family: 'Impact', 'Courier New', sans-serif;
+            letter-spacing: 2px;
+        }
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 0 0 5px black;
+        }
+
+        /* 特点区域 */
+        .features { background: #0a0505; position: relative; }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        .feature-card {
+            background: #1a0a0a;
+            border: 1px solid #3a0000;
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(139,0,0,0.2);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(139,0,0,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 40px rgba(139,0,0,0.5);
+            border-color: var(--blood);
+        }
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: #2a0a0a;
+            border: 1px solid #5a0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+            font-size: 2rem;
+            color: var(--blood);
+            box-shadow: 0 0 15px rgba(139,0,0,0.4);
+            transition: var(--transition);
+        }
+        .feature-card:hover .feature-icon {
+            box-shadow: 0 0 30px rgba(139,0,0,0.8);
+            transform: scale(1.1);
+        }
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--ghost-white);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px black;
+        }
+        .feature-card p { color: var(--text-light); font-size: 0.95rem; }
+
+        /* 产品系列 */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .product-card {
+            background: #1a0a0a;
+            border: 1px solid #3a0000;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(139,0,0,0.2);
+            transition: var(--transition);
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 40px rgba(139,0,0,0.5);
+            border-color: var(--blood);
+        }
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, #2a0a0a, #1a0505);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 70%, rgba(139,0,0,0.3) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .product-info { padding: 1.5rem; }
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--ghost-white);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+        .product-info p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 1rem; }
+        .product-tag {
+            display: inline-block;
+            background: #2a0a0a;
+            color: var(--blood);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid #5a0000;
+            box-shadow: 0 0 10px rgba(139,0,0,0.3);
+        }
+
+        /* 关于我们 */
+        .about { background: #0a0505; }
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+        .about-text { flex: 1; }
+        .about-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--ghost-white);
+            text-shadow: 0 0 15px rgba(139,0,0,0.6);
+            font-family: 'Impact', 'Courier New', sans-serif;
+            letter-spacing: 2px;
+        }
+        .about-text p { color: var(--text-light); margin-bottom: 1rem; font-size: 1.05rem; }
+        .about-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .stat-item { text-align: center; }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--blood);
+            text-shadow: 0 0 15px rgba(139,0,0,0.7);
+            font-family: 'Impact', 'Courier New', sans-serif;
+        }
+        .stat-label { color: var(--text-light); font-size: 0.9rem; }
+        .about-visual {
+            flex: 1;
+            background: linear-gradient(135deg, #2a0a0a, #1a0505);
+            border: 1px solid #3a0000;
+            border-radius: 24px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            box-shadow: 0 0 30px rgba(139,0,0,0.2);
+        }
+        .about-visual .mountain-icon {
+            font-size: 8rem;
+            opacity: 0.6;
+            filter: drop-shadow(0 0 20px rgba(139,0,0,0.5));
+        }
+
+        /* 联系我们 */
+        .contact { background: #0a0505; }
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--ghost-white);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+        .contact-info p { color: var(--text-light); margin-bottom: 1.5rem; }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+        .contact-item .icon {
+            width: 40px;
+            height: 40px;
+            background: #1a0a0a;
+            border: 1px solid #3a0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(139,0,0,0.3);
+            font-size: 1.2rem;
+        }
+        .contact-form {
+            background: #1a0a0a;
+            border: 1px solid #3a0000;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: 0 0 30px rgba(139,0,0,0.2);
+        }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--ghost-white);
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: #0d0d0d;
+            border: 1px solid #3a0000;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+            color: var(--text);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--blood);
+            box-shadow: 0 0 15px rgba(139,0,0,0.3);
+            background: #1a0a0a;
+        }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        /* 页脚 */
+        footer {
+            background: #050505;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #3a0000;
+        }
+        footer p { color: #6a5a5a; font-size: 0.9rem; text-shadow: 0 0 5px black; }
+
+        /* 恐怖幽灵 */
+        .ghost {
+            position: fixed;
+            bottom: 20%;
+            left: -50px;
+            font-size: 2rem;
+            opacity: 0.3;
+            animation: ghostMove 10s linear infinite;
+            pointer-events: none;
+            z-index: 999;
+        }
+        .ghost2 {
+            top: 30%;
+            left: auto;
+            right: -40px;
+            animation-duration: 14s;
+            animation-delay: 2s;
+            opacity: 0.2;
+        }
+        @keyframes ghostMove {
+            0% { transform: translateX(0) translateY(0); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateX(120vw) translateY(-30px); opacity: 0; }
+        }
+
+        /* 图片弹出模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .modal.show {
+            display: flex;
+        }
+        .modal img {
+            max-width: 80%;
+            max-height: 70vh;
+            border: 2px solid var(--blood);
+            box-shadow: 0 0 50px rgba(139,0,0,0.8);
+            border-radius: 8px;
+            animation: imageAppear 0.5s ease-out;
+        }
+        @keyframes imageAppear {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .modal-close {
+            margin-top: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 30px;
+            box-shadow: 0 0 20px rgba(139,0,0,0.6);
+            transition: var(--transition);
+        }
+        .modal-close:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #0d0d0d;
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+                transform: translateY(-150%);
+                transition: var(--transition);
+                z-index: 999;
+                border-bottom: 1px solid #3a0000;
+            }
+            .nav-menu.active { transform: translateY(0); }
+            .hamburger { display: flex; }
+            .hero { padding: 100px 0 60px; }
+            .hero-content { flex-direction: column; gap: 3rem; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .about-content { flex-direction: column; }
+            .contact-wrapper { grid-template-columns: 1fr; }
+            .section-header h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 恐怖装饰 -->
+    <div class="spiderweb"></div>
+    <div class="spiderweb spiderweb-left"></div>
+    <div class="ghost">👻</div>
+    <div class="ghost ghost2">👻</div>
+
+    <!-- 图片弹出模态框 -->
+    <div class="modal" id="imageModal">
+        <img src="images/scary.jpg" alt="恐怖图片" id="modalImage">
+        <button class="modal-close" id="modalClose">关闭</button>
+    </div>
+
+    <!-- 导航栏 -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">⛰️</div>
+                <span>LANJIAO 鸟峰</span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#features">产品特点</a></li>
+                <li><a href="#products">产品系列</a></li>
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#contact" class="nav-cta">联系我们</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>守护每一道<br><span>微小伤口</span></h1>
+                <p>LANJIAO 鸟峰创可贴，融合自然理念与先进工艺，为日常小伤口提供温柔而可靠的保护。</p>
+                <div class="hero-buttons">
+                    <a href="#products" class="btn btn-primary">查看产品</a>
+                    <a href="#about" class="btn btn-outline">了解更多</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-product-card">
+                    <div class="product-icon">🩹</div>
+                    <h3>鸟峰经典系列</h3>
+                    <p>透气防水 · 柔软贴合 · 强效防护</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品特点 -->
+    <section class="section features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>为什么选择鸟峰创可贴</h2>
+                <p>我们专注于每一个细节，只为给你最安心的保护</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💧</div>
+                    <h3>透气防水</h3>
+                    <p>采用微孔透气膜，有效阻隔水分和细菌，同时让皮肤自由呼吸，减少伤口浸渍。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>强效粘附</h3>
+                    <p>医用级压敏胶，粘性持久稳固，即使运动或洗手也不易脱落，撕除时温和不伤皮肤。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌿</div>
+                    <h3>亲肤柔软</h3>
+                    <p>柔软无纺布材质，贴合关节和曲面，低致敏性，敏感肌肤也能安心使用。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏔️</div>
+                    <h3>自然理念</h3>
+                    <p>品牌灵感源自鸟峰的自然纯粹，倡导简单、有效的伤口护理方式。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品系列 -->
+    <section class="section products" id="products">
+        <div class="container">
+            <div class="section-header">
+                <h2>产品系列</h2>
+                <p>不同场景，不同选择，总有一款适合你</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">🩹</div>
+                    <div class="product-info">
+                        <h3>经典标准型</h3>
+                        <p>日常防护首选，透气舒适，适合家庭常备。</p>
+                        <span class="product-tag">热销款</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">💧</div>
+                    <div class="product-info">
+                        <h3>防水透明型</h3>
+                        <p>透明超薄设计，防水性能出色，洗澡游泳无忧。</p>
+                        <span class="product-tag">防水款</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🎈</div>
+                    <div class="product-info">
+                        <h3>儿童卡通型</h3>
+                        <p>可爱卡通图案，低敏亲肤，让小朋友不再抗拒。</p>
+                        <span class="product-tag">儿童款</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section class="section about" id="about">
+        <div class="container about-content">
+            <div class="about-text">
+                <h2>关于 LANJIAO 鸟峰</h2>
+                <p>LANJIAO 鸟峰创可贴诞生于对自然与健康的追求。我们相信，最好的护理来自对细节的极致把控和对用户的真诚关怀。</p>
+                <p>从材料选择到生产工艺，每一片创可贴都经过严格质检，只为在你需要时提供可靠的保护。</p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">年行业经验</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">500万+</div>
+                        <div class="stat-label">用户信赖</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">30+</div>
+                        <div class="stat-label">产品规格</div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-visual">
+                <div class="mountain-icon">🏔️</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系我们 -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>联系我们</h2>
+                <p>有任何问题或合作意向，欢迎随时与我们沟通</p>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h3>联系方式</h3>
+                    <p>我们的团队将在工作日24小时内回复您的留言。</p>
+                    <div class="contact-item">
+                        <div class="icon">📞</div>
+                        <span>114-514-1919</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="icon">✉️</div>
+                        <span>contact@lanjiao-bandage.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <div class="icon">📍</div>
+                        <span>浙江省杭州市西湖区鸟峰路88号</span>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input type="text" id="name" name="name" placeholder="您的姓名" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">邮箱</label>
+                        <input type="email" id="email" name="email" placeholder="您的邮箱" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">留言</label>
+                        <textarea id="message" name="message" placeholder="请输入您的留言..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">发送留言</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <p>© 2026 LANJIAO 鸟峰创可贴. All rights reserved.</p>
+            <p>本网站仅作品牌展示，不提供医疗建议。如有伤口感染等严重情况，请及时就医。</p>
+            <p style="margin-top: 10px; color: #4a0000; font-style: italic;">当心夜晚的伤口...</p>
+        </div>
+    </footer>
+
+    <script>
+        // ========== 导航栏滚动效果 ==========
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // ========== 移动端菜单切换 ==========
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // ========== 表单提交处理（弹出图片和音效） ==========
+        const contactForm = document.getElementById('contactForm');
+        const modal = document.getElementById('imageModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalImage = document.getElementById('modalImage');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // 显示图片模态框
+            modal.classList.add('show');
+
+            // 播放本地音效（音频文件需放在 audio/scary.mp3）
+            try {
+                const audio = new Audio('audio/scary.mp3');
+                audio.play().catch(err => {
+                    console.warn('音频播放失败：', err);
+                });
+            } catch (err) {
+                console.warn('音频创建失败：', err);
+            }
+
+            // 可选：重置表单（根据需求可保留或去掉）
+            // contactForm.reset();
+        });
+
+        // 点击关闭按钮隐藏模态框
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+
+        // 点击模态框背景也可以关闭（可选）
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+
+        // ========== 平滑滚动 ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ========== 随机闪黑效果 ==========
+        setTimeout(() => {
+            document.body.style.transition = 'opacity 0.1s';
+            document.body.style.opacity = '0.5';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        }, 2000);
+    </script>
+</body>
+</html>
